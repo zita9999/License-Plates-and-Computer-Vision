@@ -5,23 +5,26 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import PIL
 
+name = "car6"
+name_open = name+".jpg"
+
 #reading in the input image
-plate = cv2.imread("C:/Users/chris/OneDrive/Pictures/car7.jpg")
+plate = cv2.imread("/home/asoria/Documents/zita9999/"+name_open)
 
 #function that shows the image
-def display(img, cmap = 'gray'):
+def display(img, destination = "/home/asoria/Documents/zita9999/"+name+"_processed.png"):
     fig = plt.figure(figsize = (12,10))
     ax = fig.add_subplot(111)
     ax.imshow(img,cmap = 'gray')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    cv2.imwrite("C:/Users/chris/OneDrive/Pictures/main_car4.jpg",img)
+    cv2.imwrite(destination, img)
 
 #need to change color of picture from BGR to RGB
 plate = cv2.cvtColor(plate, cv2.COLOR_BGR2RGB)
-display(plate)
+#display(plate, destination = "/home/asoria/Documents/zita9999/"+name+"_rgb.png")
 
 #Cascade Classifier where our hundres of samples of license plates are
-plate_cascade = cv2.CascadeClassifier('C:/Users/chris/OneDrive/Documents/Courses and Projects/Computer Vision/Computer-Vision-with-Python/DATA/haarcascades/haarcascade_russian_plate_number.xml')
+plate_cascade = cv2.CascadeClassifier('/home/asoria/Documents/zita9999/haarcascades/haarcascade_russian_plate_number.xml')
 
 
 def detect_plate(img):
@@ -37,8 +40,8 @@ def detect_plate(img):
 
     return plate_img
 
-result = detect_plate(plate)
-display(result)
+result2 = detect_plate(plate)
+display(result2, destination = "/home/asoria/Documents/zita9999/"+name+"_rectangle.png")
 
 
 #detects the plate and zooms in on it
@@ -116,15 +119,15 @@ kernel = np.array([[-1,-1,-1],
                    [-1,9,-1],
                    [-1,-1,-1]])
     
-result = detect_zoom_plate(plate, kernel)
-display(result)
+result3 = detect_zoom_plate(plate, kernel)
+#display(result3, destination = "/home/asoria/Documents/zita9999/"+name+"_zoomed.png")
 
-result = detect_blur(plate)
-display(result)
-
-
+result4 = detect_blur(plate)
+#display(result4, destination = "/home/asoria/Documents/zita9999/"+name+"_blurred.png")
 
 
+
+"""
 #### video
 cap = cv2.VideoCapture('C:/Users/chris/OneDrive/Documents/Apowersoft/Video Editor Pro/Output/MyVideo_5.mp4')
 
@@ -162,7 +165,7 @@ while cap.isOpened():
 cap.release()
 writer.release()
 cv2.destroyALLWindows()
-
+"""
 
 
 
