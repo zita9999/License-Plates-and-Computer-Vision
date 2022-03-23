@@ -16,11 +16,11 @@ def display(img, cmap = 'gray'):
     ax.imshow(img,cmap = 'gray')
 
 #reading in the license plate
-license_plate = cv2.imread("C:/Users/chris/OneDrive/Pictures/lic9.jpg",0)
+license_plate = cv2.imread("/home/asoria/Documents/zita9999/feat_match/license.jpg",0)
 display(license_plate)
 
 #reads in the car image
-car = cv2.imread("C:/Users/chris/OneDrive/Pictures/lic8.png",0)
+car = cv2.imread("/home/asoria/Documents/zita9999/feat_match/car.png",0)
 display(car)
 
 
@@ -35,6 +35,7 @@ def FAST_n_BRIEF(img1, img2, n=70, threshold=85):
     kp1=fast.detect(test1,None)
 
     kp2=fast.detect(test2,None)
+
 
 
     #draws circles on image 1 where features match on image 2
@@ -59,9 +60,7 @@ def FAST_n_BRIEF(img1, img2, n=70, threshold=85):
     bf = cv2.BFMatcher(cv2.NORM_HAMMING)
 
     matches = bf.match(des1,des2)
-
-
-    
+ 
     matches = sorted(matches, key = lambda x:x.distance)
     
     #draws the lines between the two images
@@ -69,7 +68,7 @@ def FAST_n_BRIEF(img1, img2, n=70, threshold=85):
 
     display(result)
     
-    cv2.imwrite("C:/Users/chris/OneDrive/Pictures/feature_match.jpg",result)
+    cv2.imwrite("/home/asoria/Documents/zita9999/feat_match/feature_match.jpg",result)
     
 
 FAST_n_BRIEF(license_plate,car)
